@@ -1,75 +1,78 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Alert, Pressable } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+// Define the type for group members
+type GroupMember = {
+  name: string;
+  github_repo: string;
+  group_no: string;
+};
 
-export default function HomeScreen() {
+export default function App() {
+  // Create a list of group members
+  const groupMembers: GroupMember[] = [
+    { name: "Abil Momin", github_repo: "abilmomin", group_no: "6" },
+    { name: "Bedgel Fadhil Ndam Woukouo", github_repo: "n/a", group_no: "6" },
+    { name: "Johan Nunez Quintero", github_repo: "n/a", group_no: "6" },
+  ];
+
+  // Event handler for the pressable text
+  const handlePress = () => {
+    Alert.alert("Lab 1 done");
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <Text style={styles.title}>Group Members</Text>
+      
+      {/* Map over the group members list */}
+      <View style={styles.memberList}>
+        {groupMembers.map((member, index) => (
+          <Text key={index} style={styles.memberName}>
+            {member.name}
+          </Text>
+        ))}
+      </View>
+      
+      {/* Pressable text to show alert */}
+      <Pressable onPress={handlePress}>
+        <Text style={styles.pressableText}>Complete Lab</Text>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
+    padding: 20,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  memberList: {
+    width: '100%',
+    marginBottom: 30,
+  },
+  memberName: {
+    fontSize: 18,
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    marginBottom: 10,
+    borderRadius: 5,
+    width: '100%',
+  },
+  pressableText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 5,
   },
 });
