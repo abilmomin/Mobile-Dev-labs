@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Alert, Pressable } from 'react-native';
 
-// Define the type for group members
+
 type GroupMember = {
   name: string;
   github_repo: string;
@@ -9,7 +9,7 @@ type GroupMember = {
 };
 
 export default function App() {
-  // Create a list of group members
+  
   const groupMembers: GroupMember[] = [
     { name: "Abil Momin", github_repo: "abilmomin", group_no: "6" },
     { name: "Bedgel Fadhil Ndam Woukouo", github_repo: "n/a", group_no: "6" },
@@ -42,6 +42,7 @@ export default function App() {
   );
 }
 
+// Style component values are optimized by the help of inbult vscode AI tool
 const styles = StyleSheet.create({
   container: {
     flex: 1,
